@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator budżetu</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Kalkulator budżetu</h1>
+    <div style="text-align: center;">
+        <label for="wypłata">Podaj kwotę wypłaty (PLN): </label>
+        <input type="number" id="wypłata" placeholder="np. 4000" oninput="calculateBudget()">
+    </div>
+
+    <h2 style="text-align: center;">Twój budżet</h2>
+    <table>
+        <tr>
+            <th>Kategoria</th>
+            <th>Kwota</th>
+        </tr>
+        <tr>
+            <td>Mieszkanie [830.00PLN]</td>
+            <td id="mieszkanie"></td>
+        </tr>
+        <tr>
+            <td>Studia [755.00PLN]</td>
+            <td id="studia"></td>
+        </tr>
+        <tr>
+            <td>Telefon+internet [140.00PLN]</td>
+            <td id="telefon_internet"></td>
+        </tr>
+        <tr>
+            <td>iCloud [50.00PLN]</td>
+            <td id="icloud"></td>
+        </tr>
+        <tr>
+            <td>Oszczędności [10%]</td>
+            <td id="oszczednosci"></td>
+        </tr>
+        <tr>
+            <td>Spłata zadłużeń [10%]</td>
+            <td id="splata"></td>
+        </tr>
+        <tr>
+            <td>Transport [5%]</td>
+            <td id="transport"></td>
+        </tr>
+        <tr>
+            <td>Ubrania [2,5%]</td>
+            <td id="ubrania"></td>
+        </tr>
+        <tr>
+            <td>Koty [3,5%]</td>
+            <td id="koty"></td>
+        </tr>
+        <tr>
+            <td>Aliexpress [1,25%]</td>
+            <td id="aliexpress"></td>
+        </tr>
+        <tr>
+            <td>Chemia [0,5%]</td>
+            <td id="chemia"></td>
+        </tr>
+        <tr>
+            <td>Kosmetyki [0,5%]</td>
+            <td id="kosmetyki"></td>
+        </tr>
+        <tr>
+            <th>Reszta</th>
+            <th id="reszta"></th>
+        </tr>
+    </table>
+
+    <script>
+        function calculateBudget() {
+            const wyplata = parseFloat(document.getElementById('wypłata').value) || 0;
+
+            const mieszkanie = 830.00;
+            const studia = 755.00;
+            const telefon_internet = 140.00;
+            const icloud = 50.00;
+
+            const oszczednosci = (wyplata * 0.10).toFixed(2);
+            const splata = (wyplata * 0.10).toFixed(2);
+            const transport = (wyplata * 0.05).toFixed(2);
+            const ubrania = (wyplata * 0.025).toFixed(2);
+            const koty = (wyplata * 0.035).toFixed(2);
+            const aliexpress = (wyplata * 0.0125).toFixed(2);
+            const chemia = (wyplata * 0.005).toFixed(2);
+            const kosmetyki = (wyplata * 0.005).toFixed(2);
+
+            const totalFixedExpenses = mieszkanie + studia + telefon_internet + icloud;
+            const totalVariableExpenses = parseFloat(oszczednosci) + parseFloat(splata) + parseFloat(transport) +
+                                          parseFloat(ubrania) + parseFloat(koty) + parseFloat(aliexpress) +
+                                          parseFloat(chemia) + parseFloat(kosmetyki);
+            const reszta = (wyplata - totalFixedExpenses - totalVariableExpenses).toFixed(2);
+
+            document.getElementById('mieszkanie').textContent = mieszkanie + ' PLN';
+            document.getElementById('studia').textContent = studia + ' PLN';
+            document.getElementById('telefon_internet').textContent = telefon_internet + ' PLN';
+            document.getElementById('icloud').textContent = icloud + ' PLN';
+            document.getElementById('oszczednosci').textContent = oszczednosci + ' PLN';
+            document.getElementById('splata').textContent = splata + ' PLN';
+            document.getElementById('transport').textContent = transport + ' PLN';
+            document.getElementById('ubrania').textContent = ubrania + ' PLN';
+            document.getElementById('koty').textContent = koty + ' PLN';
+            document.getElementById('aliexpress').textContent = aliexpress + ' PLN';
+            document.getElementById('chemia').textContent = chemia + ' PLN';
+            document.getElementById('kosmetyki').textContent = kosmetyki + ' PLN';
+            document.getElementById('reszta').textContent = reszta + ' PLN';
+        }
+    </script>
+</body>
+</html>
